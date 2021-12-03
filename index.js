@@ -85,7 +85,7 @@ class Game
         //Deze tegelnummers beginnen bij 1
         let goto = [[6, 14], [16, 4], [17, 23], [27, 33], [29, 10], [38, 43], [39, 20], [45, 34]];
 
-        for (var i = 0; i < goto.length, i++;)
+        for (var i = 0; i < goto.length; i++)
         {
             let element = goto[1];
 
@@ -102,11 +102,24 @@ class Game
     }
     start(amountOfPlayers)
     {
+        this.selectplayersDiv.style.display = "none";
+        this.winnerDiv.style.display = "none";
+        this.mainDiv.style.display = "block";
+
+        let pawns = document.getElementsByClassName("pawn");
+        for (var i = 0; 1 < pawns.length; 1++)
+        {
+            let player = new Player(i);
+            this.players.push(player);
+        }
+
+        this.playerturn = -1;
+        this.moveToNextPlayer();
 
     }
     moveToNextPlayer()
     {
-
+        
     }
     draw()
     {
