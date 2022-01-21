@@ -1,10 +1,9 @@
-function init()
-{
-    new Game();
-}
-
 let game;
 
+function init()
+{
+    game = new Game();
+}
 
 class Tile
 {
@@ -92,7 +91,7 @@ class Game
             let start = element[0] - 1;
             let end = element[1] - 1;
 
-            let tile = this.tiles(start);
+            let tile = this.tiles[start];
             tile.goto = end;
 
         }
@@ -107,7 +106,7 @@ class Game
         this.mainDiv.style.display = "block";
 
         let pawns = document.getElementsByClassName("pawn");
-        for (var i = 0; 1 < pawns.length; 1++)
+        for (var i = 0; i < amountOfPlayers; i++)
         {
             let player = new Player(i);
             this.players.push(player);
@@ -119,10 +118,21 @@ class Game
     }
     moveToNextPlayer()
     {
+        this.playerturn++
+        if (this.playturn == this.players.length)
+        {
+            this.playerturn = 0;
+        }
+
+        this.draw();
         
     }
     draw()
     {
+        for (var i = 0; i < this.players.length; i++)
+        {
+            this.setPawn(i, this.players[i].atTile);
+        }
 
     }
     roll()
@@ -131,6 +141,13 @@ class Game
     }
     setPawn(playerI, atTile)
     {
+        let tile = this.tiles[atTile];
+
+        let player = this.players[playerI];
+
+        player.pawn.style.left = tile.div.style.left;
+
+        player.pawn.style.top = tile.div.style.top;
 
     }
     makeBoardDiv(x, y, tileDisplayNumber)
